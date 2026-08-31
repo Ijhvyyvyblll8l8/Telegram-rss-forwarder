@@ -1,0 +1,32 @@
+name: Daily Agent
+
+on:
+  schedule:
+    # هر روز ساعت ۸ صبح به وقت ایران (UTC+3:30) = ۴:۳۰ UTC
+    - cron: '30 4 * * *'
+  workflow_dispatch:   # دکمه اجرای دستی برای تست
+
+jobs:
+  run-agent:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: دریافت کدها
+        uses: actions/checkout@v4
+
+      - name: نصب پایتون
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: نصب کتابخانه‌ها
+        run: pip install requests feedparser
+
+      - name: اجرای اسکریپت
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+        run: python main.py
