@@ -2,10 +2,10 @@ import requests, feedparser, imaplib, email
 from email.header import decode_header
 from datetime import datetime, timedelta
 
-TELEGRAM_TOKEN = "8858867073:AAG8vEaMsuJcdHQ3cG0dixuKoaKnemH0E4E"
-CHAT_ID = "7852648519"
-GMAIL_USER = "alihosseini22800@gmail.com"
-GMAIL_APP_PASSWORD = "inkp eqlz wxhp xqoe"
+TELEGRAM_TOKEN = "os.environ.get('TELEGRAM_TOKEN')"
+CHAT_ID = "os.environ.get('CHAT_ID')"
+GMAIL_USER = "os.environ.get('GMAIL_USER')"
+GMAIL_APP_PASSWORD = "os.environ.get('GMAIL_APP_PASSWORD')"
 
 NEWS_FEEDS = [
     "https://feeds.bbci.co.uk/persian/rss.xml",
